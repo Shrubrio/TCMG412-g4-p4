@@ -20,7 +20,7 @@ code4 = 0
 code3 = 0
 
 
-#pull marketing info and make log 
+
 if path.isfile('logfile.txt') == False:
     print('downloading log file...')
     url = 'https://s3.amazonaws.com/tcmg476/http_access_log'
@@ -29,7 +29,7 @@ if path.isfile('logfile.txt') == False:
 else: print('this file is already present on your workstation')
     
 
-#open and get to work
+
 open_log = open('logfile.txt', 'r')
 
 for row in open_log: 
