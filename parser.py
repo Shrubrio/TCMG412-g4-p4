@@ -4,7 +4,6 @@ from urllib.request import urlretrieve
 import os.path
 from os import path
 
-
 weburl = urllib.request.urlopen("https://s3.amazonaws.com/tcmg476/http_access_log")
 resultcode = print("result code: " + str(weburl.getcode()))
     
@@ -14,25 +13,50 @@ if path.isfile('logfile.txt') == False:
     urllib.request.urlretrieve (url, 'logfile.txt')
     print('done')
 else: print('this file is already present on your workstation')
+    
+file=open('logfile.txt', 'r')
 
-lastsixmonths = ["May/1995:", "Jun/1995:" , "Jul/1995:", "Aug/1995:", "Sep/1995:", "Oct/1995:"]  
-lastsix = 0
+Files = {}
+filename = []
+logfile = []
+dates = []
+NumDates = []
+Num1Dates = []
+yeartotal = []
+NumMonth = {}
+lineseg = []
+
+code4 = 0
+code3 = 0
+requests = []
+
+for line in file:
+    logfile.append(line)
+    
+for element in logfile:
+    segments = re.split(regex, element)
+    try:
+        requests.append(segments[4])
+        if segments[6].startswith('4'):
+            code4 += 1
+        if segments[6].startswith('3'):
+            code3 += 1
+    except (ValueError, IndexError):
+        pass
+    continue
+
+percent3xx = (code3 / len(dates)) * 100
+percent3xx = "{:.2f}" .format(percent3xx)
+percent4xx = (code4 / len(dates)) * 100
+percent3xx = "{:.2f}" .format(percent4xx)
+
 request_total = 0
-
-with open(r"logfile.txt", 'r') as fp:
-    lines = len(fp.readlines())
-    print('Total number of lines in file between Oct 1994 and Oct 1995:', lines)
     
 for line in open(r"logfile.txt", 'r'):
     if "GET" in line:
         request_total += 1
-        
-        for month in lastsixmonths:
-            if month in line:
-                lastsix +=1
 
 print("Total number of requests:", request_total)
 
-print("The number of logs in the last six months is", lastsix)
     
 fp.close()
