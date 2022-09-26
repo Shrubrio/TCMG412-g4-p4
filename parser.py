@@ -30,20 +30,7 @@ code4 = 0
 code3 = 0
 requests = []
 
-for line in file:
-    logfile.append(line)
-    
-for element in logfile:
-    segments = re.split(regex, element)
-    try:
-        requests.append(segments[4])
-        if segments[6].startswith('4'):
-            code4 += 1
-        if segments[6].startswith('3'):
-            code3 += 1
-    except (ValueError, IndexError):
-        pass
-    continue
+
 
 percent3xx = (code3 / len(dates)) * 100
 percent3xx = "{:.2f}" .format(percent3xx)
