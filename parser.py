@@ -20,7 +20,7 @@ code4 = 0
 code3 = 0
 
 
-
+#check if file is present
 if path.isfile('logfile.txt') == False:
     print('downloading log file...')
     url = 'https://s3.amazonaws.com/tcmg476/http_access_log'
@@ -29,9 +29,9 @@ if path.isfile('logfile.txt') == False:
 else: print('this file is already present on your workstation')
     
 
-
+#open file
 open_log = open('logfile.txt', 'r')
-
+#seperating needed data
 for row in open_log: 
     split = row.split(' ')
     if(len(split) > 8):
@@ -39,18 +39,18 @@ for row in open_log:
         filenames.append(split[6])
     if(len(split[3]) > 14):
         dates.append(split[3]) 
-        
+#counting result code instances
 for issues in errorcodes: 
     if(issues[0] == '3'):
         code3 = code3 + 1
     if(issues[0] == '4'):
         code4 = code4 + 1
-    
+ #getting code instances in percent format
 code3percent = (code3 / len(dates)) * 100
 code3percent = "{:.2f}".format(code3percent)
 code4percent = (code4 / len(dates)) * 100
 code4percent = "{:.2f}".format(code4percent)
-
+#individualising dates
 for date in dates:
     numdate.append(date[1:12])
     num1dates.append(date[1:3])
