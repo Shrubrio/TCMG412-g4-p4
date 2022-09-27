@@ -164,7 +164,7 @@ for a, b in sorted(NumMonth.items()):
 print('----------------------------------------')
 
 print("How many requests were made on a week-by-week basis?")
-print('This is an average # of requests per week')
+print('This is the average # of requests per week')
 print('---', weeklybasis, '---')
 print('----------------------------------------------------')
 
@@ -197,6 +197,6 @@ print("What was the most-requested file?")
 print('---', most_requested, '---')
 print('---------------------------------')
 
-print("What was the lease-requested file?")
+print("What was the least-requested file?")
 print('---', least_requested, '---')
 print('---------------------------------')
